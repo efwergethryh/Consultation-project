@@ -47,8 +47,9 @@ class Users extends Controller
     
     public function login(Request $req){
         
-        $email = User::where('email','LIKE',$req->email)->first()->password;
-        $cred = $req->only('email','password');
+      $email = DB::table('users')->where('email',$req->email)->first()->email;
+        $password = DB::table('users')->where('email',$req->email)->first()->pas    sword;
+        
         if(!strcmp($email,$req->email) && !strcmp($password,$req->password)){
             
             return \response()->json([
@@ -56,26 +57,14 @@ class Users extends Controller
             ]);
 
         } 
-        // $token =
-        // $token = $req->user()->createToken('surf',['expert:Surf',
-        //                                             'expert:ShowAppointments']);
-        //DB::table('remember_token')->insert($token);
-    //    if($req->user()->tokenCan('expert:Surf_Categories_consoltations')){
-    //     return response()->json([
-    //         'message'=>'authorized'
-    //     ]);
-    //    }
-    //    elseif($req->user()->tokenCan('expert:Surf_Categories_consoltations')){
-    //     return respomse()->json([
-    //         'message'=>'Not authorized'
-    //     ]);  
-    //    }
+        
        return response()->json([
         'message'=>'logged in successfully!',
        
         
         
        ]);
+
 
     }
     public function deleteUser(User $user){
