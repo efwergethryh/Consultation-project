@@ -48,7 +48,7 @@ class Users extends Controller
     public function login(Request $req){
         
       $email = DB::table('users')->where('email',$req->email)->first()->email;
-        $password = DB::table('users')->where('email',$req->email)->first()->pas    sword;
+        $password = DB::table('users')->where('email',$req->email)->first()->password;
         
         if(!strcmp($email,$req->email) && !strcmp($password,$req->password)){
             
